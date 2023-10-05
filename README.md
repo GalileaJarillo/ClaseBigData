@@ -72,3 +72,23 @@ var message: String = Hola Luke soy tu padre!
 // mutated message
 Hola Luke
 ``` 
+
+### Cual es la diferencia entre value y una variable en scala?
+``` 
+println("La variable es mutable, mientras que un value no lo es.")
+``` 
+``` sh
+La variable es mutable, mientras que un value no lo es.
+``` 
+
+### Dada la tupla (2,4,5,1,2,3,3.1416,23) regresa el numero 3.1416 
+``` 
+var list = (2,4,5,1,2,3,3.1416,23)
+val pi = list._7
+println(s"Pi = $pi")
+``` 
+``` sh
+list: (Int, Int, Int, Int, Int, Int, Double, Int) = (2,4,5,1,2,3,3.1416,23)
+pi: Double = 3.1416
+Pi = 3.1416
+``` 

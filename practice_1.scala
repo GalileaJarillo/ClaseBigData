@@ -49,3 +49,11 @@ println(s"estoy escribiendo un $bird")
 var message = "Hola Luke soy tu padre!"
 message = message.slice(5,9)
 println(s"Hola $message")
+
+// Task 5
+println("La variable es mutable, mientras que un value no lo es.")
+
+// Task 6
+var list = (2,4,5,1,2,3,3.1416,23)
+val pi = list._7
+println(s"Pi = $pi")
