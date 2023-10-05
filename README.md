@@ -17,7 +17,6 @@ circle: Double = 50.2656
 Radio es: 50.2656
 ```
 
-#Unit1 Practice 2
 ### Desarrollar un algoritmo en scala que me diga si un numero es primo
 ```
 def isEven(num: Int): Boolean = {
@@ -51,3 +50,14 @@ isEven: (num: Int)Boolean
 num: Int = 18
 18 no es primo.
 ```
+
+
+### Dada la variable bird = "tweet", utiliza interpolacion de string para imprimir "Estoy escribiendo un tweet"
+``` 
+val bird = "tweet"
+println(s"estoy escribiendo un $bird")
+``` 
+``` sh
+val bird: String = tweet
+estoy escribiendo un tweet
+``` 

@@ -39,4 +39,8 @@ if (isEven(num)) {
     println(s"$num es primo.")
 } else {
     println(s"$num no es primo.")
-}
+} 
+
+// Task 3 
+val bird = "tweet"
+println(s"estoy escribiendo un $bird")
