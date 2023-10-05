@@ -1,10 +1,8 @@
-This repo could be to show practices for Big Data
+# Unit1 Practice 1
+## This repo could be to show practices for Big Data
+Team 1:
+Christian Gandarilla && Galilea Jarillo
 
-<!-- Christian Gandarilla --> 
-
-Hello there
- <!-- Galilea Jarillo --> 
- #Unit1 Practice 1
 ### Desarrollar un algoritmo en scala que calcule el radio de un circulo
 ```
 val pi = 3.1416
