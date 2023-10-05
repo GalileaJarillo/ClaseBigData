@@ -9,3 +9,6 @@
 //6. Dada la tupla (2,4,5,1,2,3,3.1416,23) regresa el numero 3.1416 
 
 // Team 1 - Christian Gandarilla && Galilea Jarillo
+val pi = 3.1416
+val circle = pi * math.pow(4, 2)
+println(s"Radio es: $circle")
