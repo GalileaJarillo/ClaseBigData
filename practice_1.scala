@@ -44,3 +44,8 @@ if (isEven(num)) {
 // Task 3 
 val bird = "tweet"
 println(s"estoy escribiendo un $bird")
+
+// Task 4 
+var message = "Hola Luke soy tu padre!"
+message = message.slice(5,9)
+println(s"Hola $message")

@@ -61,3 +61,14 @@ println(s"estoy escribiendo un $bird")
 val bird: String = tweet
 estoy escribiendo un tweet
 ``` 
+### Dada la variable mensaje = "Hola Luke yo soy tu padre!" utiliza slilce para extraer la //   secuencia "Luke"
+``` 
+var message = "Hola Luke soy tu padre!"
+message = message.slice(5,9)
+println(s"Hola $message")
+``` 
+``` sh
+var message: String = Hola Luke soy tu padre!
+// mutated message
+Hola Luke
+``` 
