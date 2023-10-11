@@ -1,7 +1,7 @@
 # Unit 1 Practice 1
 ## This repo could be to show practices for Big Data
-Team 1:
-Christian Gandarilla && Galilea Jarillo
+### Team 1:
+### Christian Gandarilla && Galilea Jarillo
 
 ### Desarrollar un algoritmo en scala que calcule el radio de un circulo
 ```
@@ -90,3 +90,52 @@ list: (Int, Int, Int, Int, Int, Int, Double, Int) = (2,4,5,1,2,3,3.1416,23)
 pi: Double = 3.1416
 Pi = 3.1416
 ``` 
+
+# Unit 1 Practice 2
+### Crea una lista llamada "lista" con los elementos "rojo", "blanco", "negro"
+```
+```
+```sh
+```
+
+### Añadir 5 elementos mas a "lista" "verde" ,"amarillo", "azul", "naranja", "perla"
+```
+```
+```sh
+```
+
+### Traer los elementos de "lista" "verde", "amarillo", "azul"
+```
+```
+```sh
+```
+
+### Crea un arreglo de numero en rango del 1-1000 en pasos de 5 en 5
+```
+```
+```sh
+```
+
+### Cuales son los elementos únicos de la lista Lista(1,3,3,4,6,7,3,7) utilice conversión a conjuntos
+```
+```
+```sh
+```
+
+### Crea una mapa mutable llamado nombres que contenga los siguiente: "Jose", 20, "Luis", 24, "Ana", 23, "Susana", "27"
+```
+```
+```sh
+```
+
+### a . Imprime todas la llaves del mapa
+```
+```
+```sh
+```
+
+### b . Agrega el siguiente valor al mapa("Miguel", 23)
+```
+```
+```sh
+```
