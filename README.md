@@ -160,7 +160,7 @@ Set(Ana, Miguel, Luis, Jose, Susana)
 ```
 
 # Unit 1 Practice 5
-### Analice y describa cada una de las funciones del código en la sesión 6 de el tema Spark-Basics y finalmente documente en su archivo README.md en su repositorio correspondiente.
+### listEvens
 ```
 def listEvens(list:List[Int]): String ={
     for(n <- list){
@@ -177,10 +177,13 @@ val l = List(1,2,3,4,5,6,7,8)
 val l2 = List(4,3,22,55,7,8)
 listEvens(l)
 listEvens(l2)
-``` Esta variable define en lista a los números que sea par o impar 
-``` 
 ```
-// Afortunado
+```sh
+Esta variable define en lista a los números que sea par o impar 
+```
+
+### Afortunado
+```
 def afortunado(list:List[Int]): Int={
     var res=0
     for(n <- list){
@@ -196,10 +199,12 @@ def afortunado(list:List[Int]): Int={
 val af= List(1,7,7)
 println(afortunado(af))
 ```
+```sh
+Esta función recorre una lista suma todos los elementos, pero cuando encuentra un 7, suma 14 en su lugar. El resultado final es la suma modificada de los elementos de la lista.
 ```
-``` Esta función recorre una lista suma todos los elementos, pero cuando encuentra un 7, suma 14 en su lugar. El resultado final es la suma modificada de los elementos de la lista.
+
+### Balance
 ```
-``` //Balance
 def balance(list:List[Int]): Boolean={
     var primera = 0
     var segunda = 0
@@ -225,10 +230,12 @@ balance(bl)
 balance(bl2)
 balance(bl3)
 ```
-```Compara los valores de la lista para saber si esta esta balanceada, es decir que pueda dividirse en 2 partes iguales.
+```sh
+Compara los valores de la lista para saber si esta esta balanceada, es decir que pueda dividirse en 2 partes iguales.
 ```
+
+### Palíndromo
 ```
-// Palíndromo
 def palindromo(palabra:String):Boolean ={
     return (palabra == palabra.reverse)
 }
@@ -240,4 +247,7 @@ val palabra3 = "JUAN"
 println(palindromo(palabra))
 println(palindromo(palabra2))
 println(palindromo(palabra3))
-``` Esta función comprueba si el string que se inserta es un palíndromo, es decir se escribe igual de izquierda a derecha que de derecha a izquierda.
+```
+```sh
+Esta función comprueba si el string que se inserta es un palíndromo, es decir se escribe igual de izquierda a derecha que de derecha a izquierda.
+```
