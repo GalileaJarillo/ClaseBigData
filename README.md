@@ -93,22 +93,23 @@ Pi = 3.1416
 
 # Unit 1 Practice 2
 ### Crea una lista llamada "lista" con los elementos "rojo", "blanco", "negro"
-```
+```val list = List("rojo","blanco","negro")
 ```
 ```sh
-```
+```val list: List[String] = List(rojo, blanco, negro)
+List(rojo, blanco, negro)
 
 ### Añadir 5 elementos mas a "lista" "verde" ,"amarillo", "azul", "naranja", "perla"
-```
+```val newList = list:+"verde":+"amarillo":+"naranja":+"perla"
 ```
 ```sh
-```
+```val newList: List[String] = List(rojo, blanco, negro, verde, amarillo, naranja, perla)
 
 ### Traer los elementos de "lista" "verde", "amarillo", "azul"
 ```
-```
+```newList slice (3,6)
 ```sh
-```
+```val res26: List[String] = List(verde, amarillo, naranja)
 
 ### Crea un arreglo de numero en rango del 1-1000 en pasos de 5 en 5
 ```
