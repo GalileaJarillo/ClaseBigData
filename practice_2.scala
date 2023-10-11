@@ -10,3 +10,12 @@ Desarrollar los siguientes puntos con lenguaje Scala y seguir el Git Flow Básic
 6 a . Imprime todas la llaves del mapa
 6 b . Agrega el siguiente valor al mapa("Miguel", 23)
 */
+
+// Task 1
+val list = List("rojo","blanco","negro")
+
+// Task 2 
+val newList = list:+"verde":+"amarillo":+"naranja":+"perla"
+
+// Task 3
+newList slice (3,6)
