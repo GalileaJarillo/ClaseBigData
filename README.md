@@ -2,7 +2,6 @@
 # Team 1: Christian Gandarilla && Galilea Jarillo
 
 # Unit 1 Practice 3
-
 ### Desarrollar un algoritmo en scala que calcule el radio de un circulo
 ```
 val pi = 3.1416
@@ -143,7 +142,7 @@ var names = Map(("Jose", 20), ("Luis", 24), ("Ana", 23), ("Susana", 27))
 names: scala.collection.immutable.Map[String,Int] = Map(Jose -> 20, Luis -> 24, Ana -> 23, Susana -> 27)
 ```
 
-### a . Imprime todas la llaves del mapa
+#### a . Imprime todas la llaves del mapa
 ```
 println(names.keys)
 ```
@@ -151,7 +150,7 @@ println(names.keys)
 Set(Jose, Luis, Ana, Susana)
 ```
 
-### b . Agrega el siguiente valor al mapa("Miguel", 23)
+#### b . Agrega el siguiente valor al mapa("Miguel", 23)
 ```
 names += ("Miguel" -> 23)
 println(names.keys)
@@ -159,3 +158,6 @@ println(names.keys)
 ```sh
 Set(Ana, Miguel, Luis, Jose, Susana)
 ```
+
+# Unit 1 Practice 5
+### Analice y describa cada una de las funciones del código en la sesión 6 de el tema Spark-Basics y finalmente documente en su archivo README.md en su repositorio correspondiente.
