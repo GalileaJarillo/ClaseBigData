@@ -75,17 +75,25 @@ scala> df.agg(min("Volume")).show()
 
 // 11. Con Sintaxis Scala/Spark $ conteste lo siguiente:
 // a) ¿Cuántos días fue la columna “Close” inferior a $ 600?
+scala> df.filter("Close < 600").count()
 
 // b) ¿Qué porcentaje del tiempo fue la columna “High” mayor que $ 500?
+val totalRows = df.count()
+val greaterRows = df.filter("High > 500").count()
+scala> (greaterRows.toDouble / totalRows) * 100 
+
 
 // c) ¿Cuál es la correlación de Pearson entre columna “High” y la columna “Volumen”?
+scala> df.select(corr("High", "Volume")).show()
 
 // d) ¿Cuál es el máximo de la columna “High” por año?
-val yearMaxHigh = df.groupBy(year(col("Date")).alias("Year")).agg(max("High").alias("MaxHigh"))
-yearMaxHigh.show()
+scala> df.groupBy(year(col("Date")).alias("Year")).agg(max("High").alias("MaxHigh")).show()
 
 // e) ¿Cuál es el promedio de la columna “Close” para cada mes del calendario?
-df.groupBy(year(col("Date")).alias("Year"), month(col("Date")).alias("Month")).agg(avg("Close").alias("AvgClose")).show()
+scala> df.groupBy(year(col("Date")).alias("Year"), month(col("Date")).alias("Month")).agg(avg("Close").alias("AvgClose")).orderBy(desc("Year"
+)).show()
 
-// Ordenado x año
-df.groupBy(year(col("Date")).alias("Year"), month(col("Date")).alias("Month")).agg(avg("Close").alias("AvgClose")).orderBy(desc("Year")).show()
+// Ordenado por año
+scala> df.groupBy(year(col("Date")).alias("Year"), month(col("Date")).alias("Month")).agg(avg("Close").alias("AvgClose")).orderBy(desc("Year"
+)).show()
+
