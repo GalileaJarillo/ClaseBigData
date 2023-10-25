@@ -251,3 +251,84 @@ println(palindromo(palabra3))
 ```sh
 Esta función comprueba si el string que se inserta es un palíndromo, es decir se escribe igual de izquierda a derecha que de derecha a izquierda.
 ```
+
+# Unit 1 Practice 6
+### Wikipedia Algoritmos. Estos algoritmos describen la sucesión fibonacci
+´´´
+def fib(n: Int): Int = {
+  if (n < 2) {
+    return n
+  } else {
+    return fib(n - 1) + fib(n - 2)
+  }
+}
+val result = fib(5)
+println(result)
+´´´
+´´´sh
+Este algoritmo demuestra la simplicidad de la sucesión fibonacci siempre y cuando el algoritmo efectua f_{{n+1}}-1 sumas para poder encontrar el resultado.
+´´´
+´´´
+def fib(n: Int): Int = {
+  if (n == 0) {
+    return 0
+  } else if (n == 1) {
+    return 1
+  } else {
+    var a = 0
+    var b = 1
+    var c = 0
+    for (k <- 2 to n) {
+      c = a + b
+      a = b
+      b = c
+    }
+    return b
+  }
+}
+val result = fib(5)
+println(result)
+
+
+def fib(n: Int): Int = {
+  if (n == 0) {
+    return 0
+  } else if (n == 1) {
+    return 1
+  } else {
+    var a = 0
+    var b = 1
+    for (k <- 2 to n) {
+      val temp = b
+      b = b + a
+      a = temp - a
+    }
+    return a
+  }
+}
+val result = fib(1)
+println(result)
+
+
+def fib(n: Int): Int = {
+  if (n < 2) {
+    return n
+  } else {
+    val vector = new Array[Int](n + 1)
+    vector(0) = 0
+    vector(1) = 1
+
+    for (k <- 2 to n) {
+      vector(k) = vector(k - 1) + vector(k - 2)
+    }
+
+    return vector(n)
+  }
+}
+val result = fib(10)
+println(result)
+´´´
+´´´sh
+Los tres algoritmos anteriores expresan de otra manera la secuencia fibonacci
+´´´
+
