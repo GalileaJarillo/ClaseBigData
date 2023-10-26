@@ -75,11 +75,17 @@ scala> df.agg(min("Volume")).show()
 
 // 11. Con Sintaxis Scala/Spark $ conteste lo siguiente:
 // a) ¿Cuántos días fue la columna “Close” inferior a $ 600?
+// scala
 scala> df.filter("Close < 600").count()
+// spark
+scala> df.filter($"Close" < 600).count()
 
 // b) ¿Qué porcentaje del tiempo fue la columna “High” mayor que $ 500?
 val totalRows = df.count()
+// scala
 val greaterRows = df.filter("High > 500").count()
+// spark
+val greaterRows = df.filter($"High" > 500).count()
 scala> (greaterRows.toDouble / totalRows) * 100 
 
 
