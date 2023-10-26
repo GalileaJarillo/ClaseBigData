@@ -9,7 +9,7 @@ val df = spark.read.option("header", "true").option("inferSchema","true")csv("Ne
 Date, Open, High, Low, Close, Volume, Adj Close
 
 // 4. ¿Cómo es el esquema?
-scalaca> df.printSchema()
+scala> df.printSchema()
 root
  |-- Date: date (nullable = true)
  |-- Open: double (nullable = true)
@@ -20,11 +20,11 @@ root
  |-- Adj Close: double (nullable = true)
 
 // 5. Imprime las primeras 5 renglones.
-scalaca> df.show(5)
-scalaca> df.head(5)
+scala> df.show(5)
+scala> df.head(5)
 
 // 6. Usa el método describe () para aprender sobre el DataFrame.
-scalaca> df.describe().show()
+scala> df.describe().show()
 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.+-------+------------------+------------------+------------------+------------------+--------------------+------------------+
 |summary|              Open|              High|               Low|             Close|              Volume|         Adj Close|
 +-------+------------------+------------------+------------------+------------------+--------------------+------------------+
