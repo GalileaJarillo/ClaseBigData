@@ -1,7 +1,13 @@
+////////////////////////////////////////////
+///  Multilayer Perceptron Classifier   ///
+///                                    ///
+/////////////////////////////////////////
+
+
 import org.apache.spark.ml.classification.LinearSVC
 
 // Load training data
-val training = spark.read.format("libsvm").load("data/mllib/sample_libsvm_data.txt")
+val training = spark.read.format("libsvm").load("sample_libsvm_data.txt")
 
 val lsvc = new LinearSVC()
   .setMaxIter(10)
