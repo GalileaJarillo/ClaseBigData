@@ -47,11 +47,9 @@ root
  |-- Timestamp: timestamp (nullable = true)
  |-- Clicked on Ad: integer (nullable = true)
 ```
-
 ### Imprima un renglon de ejemplo
 ```
 data.head(1)
-
 val colnames = data.columns
 val firstrow = data.head(1)(0)
 println("\n")
@@ -63,7 +61,6 @@ for (ind <- Range(1, colnames.length)) {
 ```
 ```sh
 Example data row
-
 Age => 35
 Area Income => 61833.9
 Daily Internet Usage => 256.09
@@ -73,6 +70,73 @@ Male => 0
 Country => Tunisia
 Timestamp => 2016-03-27 00:53:11.0
 Clicked on Ad => 0
+```
+### Renombre la columna "Clicked on Ad" a "label"
+### Tome la siguientes columnas como features "Daily Time Spent on Site","Age","Area Income","Daily Internet Usage","Timestamp","Male"
+### Cree una nueva clolumna llamada "Hour" del Timestamp conteniendo la  "Hour of the click"
+```
+val timedata = data.withColumn("Hour",hour(data("Timestamp")))
+```
+```
+val logregdata = timedata.select(data("Clicked on Ad").as("label"), $"Daily Time Spent on Site", $"Age", $"Area Income", $"Daily Internet Usage", $"Hour", $"Male")
+```
+### Importe VectorAssembler y Vectors
+```
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.linalg.Vectors
+```
+### Cree un nuevo objecto VectorAssembler llamado assembler para los feature
+```
+val assembler = (new VectorAssembler().setInputCols(Array("Daily Time Spent on Site", "Age","Area Income","Daily Internet Usage","Hour","Male")).setOutputCol("features"))
+```
+### Utilice randomSplit para crear datos de train y test divididos en 70/30
+```
+val Array(training, test) = logregdata.randomSplit(Array(0.7, 0.3), seed = 12345)
+```
+### Importe  Pipeline
+```
+import org.apache.spark.ml.Pipeline
+```
+### Cree un nuevo objeto de  LogisticRegression llamado lr
+```
+val lr = new LogisticRegression()
+```
+### Cree un nuevo  pipeline con los elementos: assembler, lr
+```
+val pipeline = new Pipeline().setStages(Array(assembler, lr))
+```
+### Ajuste (fit) el pipeline para el conjunto de training.
+```
+val model = pipeline.fit(training)
+```
+### Tome los Resultados en el conjuto Test con transform
+```
+val results = model.transform(test)
+```
+### Para Metrics y Evaluation importe MulticlassMetrics
+```
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
+```
+### Convierta los resutalos de prueba (test) en RDD utilizando .as y .rdd
+```
+val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
+```
+### Inicialice un objeto MulticlassMetrics 
+```
+val metrics = new MulticlassMetrics(predictionAndLabels)
+```
+### Imprima la  Confusion matrix
+```
+println("Confusion matrix:")
+println(metrics.confusionMatrix)
+
+metrics.accuracy
+```
+```sh
+Confusion matrix:
+136.0  1.0    
+4.0    146.0
+res75: Double = 0.9825783972125436
 ```
 
 ## Practice 3

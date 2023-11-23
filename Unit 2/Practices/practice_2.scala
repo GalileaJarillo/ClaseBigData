@@ -83,10 +83,7 @@ val logregdata = timedata.select(data("Clicked on Ad").as("label"), $"Daily Time
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.linalg.Vectors
 
-val assembler = (new VectorAssembler()
-                  .setInputCols(Array("Daily Time Spent on Site", "Age","Area Income","Daily Internet Usage","Hour","Male"))
-                  .setOutputCol("features"))
-
+val assembler = (new VectorAssembler().setInputCols(Array("Daily Time Spent on Site", "Age","Area Income","Daily Internet Usage","Hour","Male")).setOutputCol("features"))
 
 
 // Utilice randomSplit para crear datos de train y test divididos en 70/30
