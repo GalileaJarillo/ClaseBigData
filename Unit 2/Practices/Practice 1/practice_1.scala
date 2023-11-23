@@ -10,7 +10,6 @@ import org.apache.spark.ml.regression.LinearRegression
 import org.apache.log4j._
 Logger.getLogger("org").setLevel(Level.ERROR)
 
-
 // Inicie una simple Sesion Spark
 import org.apache.spark.sql.SparkSession
 val spark = SparkSession.builder().getOrCreate()
@@ -40,22 +39,30 @@ for(ind <- Range(1, colnames.length)) {
 // ("label","features")
 
 // Importe VectorAssembler y Vectors
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.linalg.Vectors
 
 // Renombre la columna Yearly Amount Spent como "label"
 // Tambien de los datos tome solo la columa numerica 
 // Deje todo esto como un nuevo DataFrame que se llame df
+val df = data.select(data("Yearly Amount Spent").as("label"), $"Avg Session Length", $"Time on App", $"Time on Website", $"Length of Membership")
 
 // Que el objeto assembler convierta los valores de entrada a un vector
+// Utilice el objeto VectorAssembler para convertir la columnas de entradas del df a una sola columna de salida de un arreglo llamado  "features"
+val assembler = (new VectorAssembler().setInputCols(Array("Avg Session Length", "Time on App", "Time on Website", "Length of Membership")).setOutputCol("features"))
 
-
-// Utilice el objeto VectorAssembler para convertir la columnas de entradas del df
-// a una sola columna de salida de un arreglo llamado  "features"
 // Configure las columnas de entrada de donde se supone que leemos los valores.
 // Llamar a esto nuevo assambler.
-
 // Utilice el assembler para transform nuestro DataFrame a dos columnas: label and features
+val newAssembler = assembler.transform(df).select($"label", $"features")
 
+newAssembler.show()
 
+///////////////////////////////
+// Configure un Pipeline ///////
+/////////////////////////////
+
+// Importe Pipeline
 // Crear un objeto para modelo de regresion linea.
 
 
