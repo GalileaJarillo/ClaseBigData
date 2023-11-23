@@ -4,6 +4,7 @@
 /////////////////////////////////////////
 
 // Import LinearRegression
+import org.apache.spark.ml.regression.LinearRegression
 
 // Opcional: Utilice el siguiente codigo para configurar errores
 import org.apache.log4j._
@@ -11,15 +12,25 @@ Logger.getLogger("org").setLevel(Level.ERROR)
 
 
 // Inicie una simple Sesion Spark
+import org.apache.spark.sql.SparkSession
+val spark = SparkSession.builder().getOrCreate()
 
 // Utilice Spark para el archivo csv Clean-Ecommerce .
+val data  = spark.read.option("header","true").option("inferSchema", "true").format("csv").load("Clean-Ecommerce.csv")
 
 // Imprima el schema en el DataFrame.
-
+data.printSchema()
 
 // Imprima un renglon de ejemplo del DataFrane.
+data.head(1)
 
-
+val colnames = data.columns
+val firstrow = data.head(1)(0)
+println("\n")
+println("Example data row")
+for(ind <- Range(1, colnames.length)) {
+    println(s"${colnames(ind)} => ${firstrow(ind)}")
+}
 
 //////////////////////////////////////////////////////
 //// Configure el DataFrame para Machine Learning ////
