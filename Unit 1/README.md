@@ -1,7 +1,5 @@
-# This repo could be to show practices for Big Data
-# Team 1: Christian Gandarilla && Galilea Jarillo
-
-# Unit 1 Practice 3
+# Unit I
+## Practice 3
 ### Desarrollar un algoritmo en scala que calcule el radio de un circulo
 ```
 val pi = 3.1416
@@ -90,7 +88,7 @@ pi: Double = 3.1416
 Pi = 3.1416
 ``` 
 
-# Unit 1 Practice 4
+## Practice 4
 ### Crea una lista llamada "lista" con los elementos "rojo", "blanco", "negro"
 ```
 val list = List("rojo","blanco","negro")
@@ -159,7 +157,7 @@ println(names.keys)
 Set(Ana, Miguel, Luis, Jose, Susana)
 ```
 
-# Unit 1 Practice 5
+## Practice 5
 ### listEvens
 ```
 def listEvens(list:List[Int]): String ={
@@ -252,7 +250,7 @@ println(palindromo(palabra3))
 Esta función comprueba si el string que se inserta es un palíndromo, es decir se escribe igual de izquierda a derecha que de derecha a izquierda.
 ```
 
-# Unit 1 Practice 6
+## Practice 6
 ### Wikipedia Algoritmos. Estos algoritmos describen la sucesión fibonacci
 ´´´
 def fib(n: Int): Int = {
@@ -332,7 +330,7 @@ println(result)
 Los tres algoritmos anteriores expresan de otra manera la secuencia fibonacci
 ´´´
 
-# Examen Unidad I
+# Examn
 ### 1. Comienza una simple sesión Spark.
 ```
 import org.apache.spark.sql.SparkSession
@@ -549,5 +547,3 @@ scala> df.groupBy(year(col("Date")).alias("Year"), month(col("Date")).alias("Mon
 +----+-----+------------------+
 only showing top 20 rows
 ```
-
-
