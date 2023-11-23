@@ -1,20 +1,34 @@
-////////////////////////////////////////////
-///  Multilayer Perceptron Classifier   ///
-///                                    ///
-/////////////////////////////////////////
+import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 
+// Load the data stored in LIBSVM format as a DataFrame.
+val data = spark.read.format("libsvm")
+  .load("sample_multiclass_classification_data.txt")
 
-import org.apache.spark.ml.classification.LinearSVC
+// Split the data into train and test
+val splits = data.randomSplit(Array(0.6, 0.4), seed = 1234L)
+val train = splits(0)
+val test = splits(1)
 
-// Load training data
-val training = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+// specify layers for the neural network:
+// input layer of size 4 (features), two intermediate of size 5 and 4
+// and output of size 3 (classes)
+val layers = Array[Int](4, 5, 4, 3)
 
-val lsvc = new LinearSVC()
-  .setMaxIter(10)
-  .setRegParam(0.1)
+// create the trainer and set its parameters
+val trainer = new MultilayerPerceptronClassifier()
+  .setLayers(layers)
+  .setBlockSize(128)
+  .setSeed(1234L)
+  .setMaxIter(100)
 
-// Fit the model
-val lsvcModel = lsvc.fit(training)
+// train the model
+val model = trainer.fit(train)
 
-// Print the coefficients and intercept for linear svc
-println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
+// compute accuracy on the test set
+val result = model.transform(test)
+val predictionAndLabels = result.select("prediction", "label")
+val evaluator = new MulticlassClassificationEvaluator()
+  .setMetricName("accuracy")
+
+println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
