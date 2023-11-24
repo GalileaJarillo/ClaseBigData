@@ -186,12 +186,3 @@ val evaluator: org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator 
 ```sh
 println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
 ```
-
-# Examn
-### [title]
-```
-[code]
-```
-```sh
-[results]
-```
