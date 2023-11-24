@@ -164,7 +164,7 @@ val splits = data.randomSplit(Array(0.6, 0.4), seed = 1234L)
 val train = splits(0)
 val test = splits(1)
 ```
-### Específique las capas de la red neuronal // conecte las capas 4 (features), 2 intermedias de medida 5 y 4 // and output of size 3 (classes)
+### Específique las capas de la red neuronal conecte las capas 4 (features), 2 intermedias de medida 5 y 4, salida de tamaño 3 (classes)
 ```
 val layers = Array[Int](4, 5, 4, 3)
 ```
