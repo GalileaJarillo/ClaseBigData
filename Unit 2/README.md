@@ -33,13 +33,17 @@ println("Example data row")
 for(ind <- Range(1, colnames.length)) {
     println(s"${colnames(ind)} => ${firstrow(ind)}")
 }
+```
 ### Configure el dataframe para machine learning
 ### // Transforme el data frame para que tome la forma de // ("label","features")
 ``` 
 ### Importe vectorassembler y vectors
+```
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.linalg.Vectors
-``` data.columns
+``` 
+data.columns
+```
 ### Renombre la columna Yearly Amount Spent como "label"
 ### Tambien de los datos tome solo la columa numerica 
 ### Deje todo esto como un nuevo DataFrame que se llame df
@@ -61,16 +65,19 @@ newAssembler.show()
 ### // Crear un objeto para modelo de regresion linea.
 import org.apache.spark.ml.classification.LinearRegression
 ```
+```
 ### Ajuste el modelo para los datos y llame a este modelo lrModelo
 ```
 val lr = new LinearRegression()
 val lrModelo = lr.fit(newAssembler)
 ```
-### // Imprima the  coefficients y intercept para la regresion lineal
+### Imprima the  coefficients y intercept para la regresion lineal
+```
 ### Resuma el modelo sobre el conjunto de entrenamiento imprima la salida de algunas metricas!
 ### Utilice método .summary de nuestro  modelo para crear un objeto llamado trainingSummary
 ```
 val trainingSummary = lrModelo.summary
+```
 ```
 ### Muestre los valores de residuals, el RMSE, el MSE, y tambien el R^2 .
 ```
