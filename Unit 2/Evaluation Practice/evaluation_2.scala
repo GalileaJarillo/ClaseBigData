@@ -20,6 +20,7 @@ data.show(5)
 data.describe().show()
 
 
+
 // 6. Transformación para datos categóricos (etiquetas a clasificar)
 val labelIndexer = new StringIndexer().setInputCol("sepal_length","sepal_width","petal_length","petal_width").setOutputCol("label").fit(data)
 
