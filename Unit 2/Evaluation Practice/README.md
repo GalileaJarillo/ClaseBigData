@@ -72,6 +72,8 @@ val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("
 val Array(training, test) = features.randomSplit(Array(0.7, 0.3), seed = 12345)  
 ```
 ### 7. Construya el modelo de clasificación y explique su arquitectura.
+Se utilizó Multilayer Perceptron Classifier, para transformar un conjunto de datos de prueba, generando predicciones y otros resultados.  Para construir y entrenar un el modelo se realizó un proceso donde se crearon indexes para manipular el entrenamiento, se utilizaron etiquetas para interpretar de las predicciones del modelo.
+
 ```
 val layers = Array[Int](4, 5, 4, 3)
 
@@ -113,6 +115,7 @@ results.show()
 +------------+-----------+------------+-----------+----------+-----------------+------------+-----------------+--------------------+--------------------+----------+--------------+
 ```
 ### 8. Imprima los resultados del modelo y de sus observaciones.
+Para evaluar el modelo se utiliza pipeline que engloba el setup, se crea un evaluador de clasificación multiclase y para calcular la precisión del mismo se usa accuracy. Para finalizar y calcular la precisión del modelo se imprime el resultado, y se evalía a través de prediction e indexed label. 
 ```
 val model = pipeline.fit(training)
 val results = model.transform(test)
