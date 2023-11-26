@@ -1,6 +1,26 @@
-# Proyecto Final: Comparación de Rendimiento del Algoritmo Multilayer Perceptron Classifier
+**UNIVERSIDAD AUTÓNOMA DE BAJA CALIFORNIA**
 
-## Contenido
+**FACULTAD DE CONTADURÍA Y ADMINISTRACIÓN**
+
+![Escudo de la UABC](uabc_logo.png)**MAESTRÍA EN GESTIÓN DE LAS TECNOLOGÍAS DE LA INFORMACIÓN Y LA COMUNICACIÓN**
+
+**BIG DATA**
+
+**DR. JOSÉ CHRISTIAN ROMERO HERNÁNDEZ**
+
+**EQUIPO 1**
+
+FERNANDO CHRISTIAN GANDARILLA CARRILLO
+
+GALILEA JARILLO DÁVILA
+
+
+**PROYECTO FINAL**
+
+COMPARACIÓN DE RENDIMIENTO DEL ALGORITMO MULTILAYER PERCEPTRON CLASSIFIER
+
+
+## Índice
 
 1. [Portada](#portada)
 2. [Índice](#índice)
@@ -9,13 +29,6 @@
 5. [Resultados](#resultados)
 6. [Conclusiones](#conclusiones)
 
-## Portada
-
-_(Puedes agregar detalles sobre el proyecto, título, autores, afiliaciones, etc.)_
-
-## Índice
-
-_(Lista de secciones y subsecciones con enlaces correspondientes)_
 
 ## Introducción
 
