@@ -1,25 +1,34 @@
-**UNIVERSIDAD AUTÓNOMA DE BAJA CALIFORNIA**
+<h1 align="center">UNIVERSIDAD AUTÓNOMA DE BAJA CALIFORNIA</h1>
 
-**FACULTAD DE CONTADURÍA Y ADMINISTRACIÓN**
+<h2 align="center">FACULTAD DE CONTADURÍA Y ADMINISTRACIÓN</h2>
 
-![Escudo de la UABC](/Final%20Project/portada.md)
+<p align="center">
+  <img src="/Final Project/uabc_logo.png" alt="Escudo de la UABC">
+</p>
 
-**MAESTRÍA EN GESTIÓN DE LAS TECNOLOGÍAS DE LA INFORMACIÓN Y LA COMUNICACIÓN**
+<h3 align="center">MAESTRÍA EN GESTIÓN DE LAS TECNOLOGÍAS DE LA INFORMACIÓN Y LA COMUNICACIÓN</h3>
 
-**BIG DATA**
+<h4 align="center">BIG DATA</h4>
 
-**DR. JOSÉ CHRISTIAN ROMERO HERNÁNDEZ**
+<p align="center">DR. JOSÉ CHRISTIAN ROMERO HERNÁNDEZ</p>
 
-**EQUIPO 1**
+<p align="center"><strong>EQUIPO 1</strong></p>
 
-FERNANDO CHRISTIAN GANDARILLA CARRILLO
+<p align="center">
+  <em>
+    Fernando Christian Gandarilla Carrillo <br>
+    Galilea Jarillo Dávila
+  </em>
+</p>
 
-GALILEA JARILLO DÁVILA
+---
 
+# PROYECTO FINAL
 
-**PROYECTO FINAL**
+## COMPARACIÓN DE RENDIMIENTO DEL ALGORITMO MULTILAYER PERCEPTRON CLASSIFIER
 
-COMPARACIÓN DE RENDIMIENTO DEL ALGORITMO MULTILAYER PERCEPTRON CLASSIFIER
+---
+
 ## Índice
 
 1. [Portada](#portada)
@@ -29,14 +38,19 @@ COMPARACIÓN DE RENDIMIENTO DEL ALGORITMO MULTILAYER PERCEPTRON CLASSIFIER
 5. [Resultados](#resultados)
 6. [Conclusiones](#conclusiones)
 
+---
 
 ## Introducción
 
 El objetivo de este proyecto es comparar el rendimiento del algoritmo de machine learning Multilayer Perceptron Classifier al cambiar el seed de aleatoridad en la fase de separación de datos (randomSplit) 10 veces. Utilizamos como fuente de datos el conjunto de datos del [Bank Marketing](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing).
 
+---
+
 ## Implementación
 
 Para este proyecto, elegimos utilizar Spark con Scala debido a su capacidad para procesar grandes volúmenes de datos de manera distribuida y eficiente. Spark proporciona las funcionalidades necesarias para realizar tareas de procesamiento y modelado de datos de manera escalable.
+
+---
 
 ## Resultados
 
@@ -55,6 +69,8 @@ Realizamos 10 corridas del algoritmo Multilayer Perceptron Classifier cambiando 
 |   9     |   0.90    |
 |   10    |   0.88    |
 | **Promedio** | **0.86** |
+
+---
 
 ## Conclusiones
 
