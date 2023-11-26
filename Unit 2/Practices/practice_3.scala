@@ -16,7 +16,8 @@ val data = spark.read.format("libsvm").load("sample_libsvm_data.txt")
 val labelIndexer = new StringIndexer().setInputCol("label").setOutputCol("indexedLabel").fit(data)
 
 // Identifica automáticamente las características categóricas y las indexa.
-val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4) // Las características con más de 4 valores distintos se tratan como continuas..fit(data)
+val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4)
+// Las características con más de 4 valores distintos se tratan como continuas..fit(data)
 
 // Divide los datos en conjuntos de entrenamiento y prueba (30% reservado para pruebas).
 val Array(trainingData, testData) = data.randomSplit(Array(0.7, 0.3))
@@ -25,7 +26,7 @@ val Array(trainingData, testData) = data.randomSplit(Array(0.7, 0.3))
 val dt = new DecisionTreeClassifier().setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures")
 
 // Convierte las etiquetas indexadas a etiquetas originales.
-val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labelsArray(0))
+val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labelsArray(10))
 
 // Encadena indexadores y árbol en un Pipeline.
 val pipeline = new Pipeline().setStages(Array(labelIndexer, featureIndexer, dt, labelConverter))

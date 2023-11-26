@@ -19,13 +19,22 @@ val spark = SparkSession.builder().getOrCreate()
 val data  = spark.read.option("header","true").option("inferSchema", "true").format("csv").load ;"Clean-Ecommerce.csv"
 ``` 
 ### Imprima el schema en el DataFrame
-``` 
+```
 data.printSchema()
-``` sh
+```
+```sh
+root
+ |-- Email: string (nullable = true)
+ |-- Avatar: string (nullable = true)
+ |-- Avg Session Length: double (nullable = true)
+ |-- Time on App: double (nullable = true)
+ |-- Time on Website: double (nullable = true)
+ |-- Length of Membership: double (nullable = true)
+ |-- Yearly Amount Spent: double (nullable = true)
+``` 
 ### Imprima un renglon de ejemplo del DataFrane.
 ``` 
 data.head(1)
-``` 
 val colnames = data.columns
 val firstrow = data.head(1)(0)
 println("\n")
@@ -34,16 +43,22 @@ for(ind <- Range(1, colnames.length)) {
     println(s"${colnames(ind)} => ${firstrow(ind)}")
 }
 ```
+```sh
+Avatar => Violet
+Avg Session Length => 34.49726772511229
+Time on App => 12.65565114916675
+Time on Website => 39.57766801952616
+Length of Membership => 4.0826206329529615
+Yearly Amount Spent => 587.9510539684005
+```
 ### Configure el dataframe para machine learning
-### // Transforme el data frame para que tome la forma de // ("label","features")
-``` 
+### Transforme el data frame para que tome la forma de ("label","features")
 ### Importe vectorassembler y vectors
 ```
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.linalg.Vectors
-``` 
 data.columns
-```
+``` 
 ### Renombre la columna Yearly Amount Spent como "label"
 ### Tambien de los datos tome solo la columa numerica 
 ### Deje todo esto como un nuevo DataFrame que se llame df
@@ -62,9 +77,9 @@ val assembler = (new VectorAssembler().setInputCols(Array("Avg Session Length", 
 val newAssembler = assembler.transform(df).select($"label", $"features")
 newAssembler.show()
 ```
-### // Crear un objeto para modelo de regresion linea.
-import org.apache.spark.ml.classification.LinearRegression
+### Crear un objeto para modelo de regresion linea.
 ```
+import org.apache.spark.ml.classification.LinearRegression
 ```
 ### Ajuste el modelo para los datos y llame a este modelo lrModelo
 ```
@@ -72,12 +87,10 @@ val lr = new LinearRegression()
 val lrModelo = lr.fit(newAssembler)
 ```
 ### Imprima the  coefficients y intercept para la regresion lineal
-```
 ### Resuma el modelo sobre el conjunto de entrenamiento imprima la salida de algunas metricas!
 ### Utilice método .summary de nuestro  modelo para crear un objeto llamado trainingSummary
 ```
 val trainingSummary = lrModelo.summary
-```
 ```
 ### Muestre los valores de residuals, el RMSE, el MSE, y tambien el R^2 .
 ```
@@ -86,9 +99,58 @@ trainingSummary.predictions.show()
 trainingSummary.r2
 trainingSummary.rootMeanSquaredError
 ```
-### Buen trabajo!
-
-
+```sh
++-------------------+
+|          residuals|
++-------------------+
+| -6.788234090018818|
+| 11.841128565326073|
+| -17.65262700858966|
+| 11.454889631178617|
+| 7.7833824373080915|
+|-1.8347332184773677|
+|  4.620232401352382|
+| -8.526545950978175|
+| 11.012210896516763|
+|-13.828032682158891|
+| -16.04456458615175|
+|  8.786634365463442|
+| 10.425717191807507|
+| 12.161293785003522|
+|  9.989313714461446|
+| 10.626662732649379|
+|  20.15641408428496|
+|-3.7708446586326545|
+| -4.129505481591934|
+|  9.206694655890487|
++-------------------+
++------------------+--------------------+------------------+
+|             label|            features|        prediction|
++------------------+--------------------+------------------+
+| 587.9510539684005|[34.4972677251122...| 594.7392880584193|
+| 392.2049334443264|[31.9262720263601...| 380.3638048790003|
+|487.54750486747207|[33.0009147556426...|505.20013187606173|
+| 581.8523440352177|[34.3055566297555...| 570.3974544040391|
+| 599.4060920457634|[33.3306725236463...| 591.6227096084554|
+|  637.102447915074|[33.8710378793419...| 638.9371811335513|
+| 521.5721747578274|[32.0215955013870...|  516.951942356475|
+| 549.9041461052942|[32.7391429383803...| 558.4306920562724|
+| 570.2004089636196|[33.9877728956856...| 559.1881980671028|
+| 427.1993848953282|[31.9365486184489...| 441.0274175774871|
+| 492.6060127179966|[33.9925727749537...| 508.6505773041483|
+| 522.3374046069357|[33.8793608248049...| 513.5507702414723|
+| 408.6403510726275|[29.5324289670579...|   398.21463388082|
+| 573.4158673313865|[33.1903340437226...|  561.254573546383|
+| 470.4527333009554|[32.3879758531538...|460.46341958649396|
+| 461.7807421962299|[30.7377203726281...| 451.1540794635805|
+|457.84769594494855|[32.1253868972878...| 437.6912818606636|
+|407.70454754954415|[32.3388993230671...| 411.4753922081768|
+| 452.3156754800354|[32.1878120459321...|456.44518096162733|
+|  605.061038804892|[32.6178560628234...| 595.8543441490015|
++------------------+--------------------+------------------+
+res22: Double = 0.9843155370226727
+res23: Double = 9.923256785022229
+```
 
 
 ## Practice 2 - Proyecto de Regresion Logistica
@@ -222,6 +284,7 @@ Confusion matrix:
 res75: Double = 0.9825783972125436
 ```
 
+
 ## Practice 3
 ### [title]
 ```
@@ -230,6 +293,7 @@ res75: Double = 0.9825783972125436
 ```sh
 [results]
 ```
+
 
 ## Practice 4 - MultilayerPerceptronClassifier
 ### Importe una  SparkSession con la libreria Multilayer Perceptron Classifier
