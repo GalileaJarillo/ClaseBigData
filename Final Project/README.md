@@ -31,12 +31,10 @@
 
 ## Índice
 
-1. [Portada](#portada)
-2. [Índice](#índice)
-3. [Introducción](#introducción)
-4. [Implementación](#implementación)
-5. [Resultados](#resultados)
-6. [Conclusiones](#conclusiones)
+1. [Introducción](#introducción)
+2. [Implementación](#implementación)
+3. [Resultados](#resultados)
+4. [Conclusiones](#conclusiones)
 
 ---
 
