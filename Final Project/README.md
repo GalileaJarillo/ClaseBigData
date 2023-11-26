@@ -1,29 +1,8 @@
-# UNIVERSIDAD AUTÓNOMA DE BAJA CALIFORNIA
 
-## FACULTAD DE CONTADURÍA Y ADMINISTRACIÓN
+![Portada](/Final%20Project/portada/portada.md)
+![Escudo de la UABC](/Final%20Project/portada/uabc_logo.png)
 
-![Escudo de la UABC](uabc_logo.png)
-
-### MAESTRÍA EN GESTIÓN DE LAS TECNOLOGÍAS DE LA INFORMACIÓN Y LA COMUNICACIÓN
-
-#### BIG DATA
-
-**DR. JOSÉ CHRISTIAN ROMERO HERNÁNDEZ**
-
-**EQUIPO 1**
-
-- Fernando Christian Gandarilla Carrillo
-- Galilea Jarillo Dávila
-
----
-
-##            PROYECTO FINAL
-
-**COMPARACIÓN DE RENDIMIENTO DEL ALGORITMO MULTILAYER PERCEPTRON CLASSIFIER**
-
-
-
-## Índice
+## Contenido
 
 1. [Portada](#portada)
 2. [Índice](#índice)
