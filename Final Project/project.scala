@@ -1,35 +1,17 @@
-<<<<<<< HEAD
-=======
-/*import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
+import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.ml.feature.IndexToString
 import org.apache.spark.ml.feature.StringIndexer
-import org.apache.spark.ml.feature.VectorIndexer*/
+import org.apache.spark.ml.feature.VectorIndexer
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.ml.feature.VectorAssembler
->>>>>>> 1740c7858dde04ba34677bec431833ce3917cfb8
 
 import org.apache.spark.sql.SparkSession
 val spark = SparkSession.builder().getOrCreate()
 val data  = spark.read.option("header","true").option("inferSchema", "true").csv("bank-full.csv")
 
 data.printSchema()
-<<<<<<< HEAD
-
-val bank = data.drop("age","marital","education","default","housing","loan","contact","day","month","duration","campaign","pdays","previous","poutcome","y")
-
-val newBank = bank.withColumn("balance", col("balance").cast("Double")).withColumn("marital2", col("marital2").cast("Double")).withColumn("education2", col("education2").cast("Double")).withColumn("contact2", col("contact2").cast("Double"))
-
-import org.apache.spark.ml.feature.VectorAssembler
-val assembler = new VectorAssembler().setInputCols(Array("marital2","balance","education2","contact2")).setOutputCol("features")
-
-val features = assembler.transform(newBank)
-
-val indexerLabel = new StringIndexer().setInputCol("job").setOutputCol("indexedLabel").fit(features)
-
-val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4)
-=======
 data.show(5)
 data.describe().show()
 
@@ -44,7 +26,6 @@ features.printSchema()
 val indexerLabel = new StringIndexer().setInputCol("job").setOutputCol("indexedLabel").fit(features)
 
 val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(2)
->>>>>>> 1740c7858dde04ba34677bec431833ce3917cfb8
 
 val Array(training, test) = features.randomSplit(Array(0.7, 0.3), seed = 12345)  
 
