@@ -30,16 +30,16 @@ val assembler = new VectorAssembler()
 val assembledData = assembler.transform(indexedData)
 
 // Split the data using different seeds 10 times
-val Array(trainData, testData) = assembledData.randomSplit(Array(0.7, 0.3), seed = 12345)
+val Array(trainData, testData) = assembledData.randomSplit(Array(0.99, 0.01), seed = 1234L)
 
 // Define the layers for the neural network
-val layers = Array[Int](3, 5, 4, 2) // Example layer sizes: input, hidden, hidden, output
+val layers = Array[Int](4, 5, 4, 3)
 
 // Create the MultilayerPerceptronClassifier
 val mlp = new MultilayerPerceptronClassifier()
 .setLayers(layers)
 .setBlockSize(128)
-.setSeed(12345)
+.setSeed(1234L)
 .setMaxIter(100)
 
 // Assuming 'label' is your target column and you want to convert it to binary labels
@@ -57,5 +57,5 @@ val evaluator = new MulticlassClassificationEvaluator()
 .setPredictionCol("prediction")
 .setMetricName("accuracy")
 
-println(s"Prediction test = ${evaluator.evaluate(predictions.select("prediction", "label"))}")
+println(s"Test = ${evaluator.evaluate(predictions.select("prediction", "label"))}")
 

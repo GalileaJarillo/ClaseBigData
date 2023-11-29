@@ -54,19 +54,19 @@ Para este proyecto, elegimos utilizar Spark con Scala debido a su capacidad para
 
 Realizamos 10 corridas del algoritmo Multilayer Perceptron Classifier cambiando el seed de aleatoridad en la fase de separación de datos. A continuación se presenta una tabla con los datos de precisión de cada corrida y el promedio de su desempeño:
 
-| Corrida | Precisión |
-|---------|-----------|
-|   1     |   0.85    |
-|   2     |   0.82    |
-|   3     |   0.88    |
-|   4     |   0.86    |
-|   5     |   0.89    |
-|   6     |   0.87    |
-|   7     |   0.84    |
-|   8     |   0.85    |
-|   9     |   0.90    |
-|   10    |   0.88    |
-| **Promedio** | **0.86** |
+| Corrida|                Comando de prueba              |         Precisión        |
+|--------|-----------------------------------------------|--------------------------|
+|   1    |  randomSplit(Array(0.1, 0.9), seed = 12345)   |   0.21474595445378977    |
+|   2    |  randomSplit(Array(0.7, 0.3), seed = 22245)   |   0.21788666319160027    |
+|   3    |  randomSplit(Array(0.2, 0.8), seed = 12345)   |   0.2154008263316973     |
+|   4    |  randomSplit(Array(0.25, 0.75), seed = 78951) |   0.21487261334752025    |
+|   5    |  randomSplit(Array(0.33, 0.67), seed = 45456) |   0.21387054161162483    |
+|   6    |  randomSplit(Array(0.4, 0.6), seed = 63888)   |   0.21485155845117346    |
+|   7    |  randomSplit(Array(0.5, 0.5), seed = 12345)   |   0.21506988228032273    |
+|   8    |  randomSplit(Array(0.7, 0.3), seed = 22244)   |   0.215161502966381      |
+|   9    |  randomSplit(Array(0.73, 0.27), seed = 89775) |   0.21023240535435658    |
+|   10   |  randomSplit(Array(0.99, 0.01), seed = 1234L) |   0.21171171171171171    |
+|        |                                 **Promedio**  |        **0.214**         |
 
 ---
 
