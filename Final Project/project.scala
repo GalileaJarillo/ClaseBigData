@@ -1,65 +1,61 @@
-<<<<<<< HEAD
-=======
 import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
-import org.apache.spark.ml.feature.IndexToString
-import org.apache.spark.ml.feature.StringIndexer
-import org.apache.spark.ml.feature.VectorIndexer
+import org.apache.spark.ml.feature.{StringIndexer, VectorAssembler}
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.ml.Pipeline
-import org.apache.spark.ml.feature.VectorAssembler
->>>>>>> cf4c988c14090fe1bd1aa558205978afcd2a1069
 
-import org.apache.spark.sql.SparkSession
 val spark = SparkSession.builder().getOrCreate()
-val data  = spark.read.option("header","true").option("inferSchema", "true").csv("bank-full.csv")
 
-data.printSchema()
-<<<<<<< HEAD
+// Load the dataset
+val data = spark.read.option("header", "true").option("inferSchema", "true").csv("bank-full.csv")
 
-val bank = data.drop("age","marital","education","default","housing","loan","contact","day","month","duration","campaign","pdays","previous","poutcome","y")
+val selectedData = data.select(
+  col("age").cast("double"),
+  col("job"),
+  col("marital"),
+  col("education"),
+  col("balance").cast("double"),
+  col("day").cast("double"),
+).toDF("age", "job", "marital", "education", "balance", "day")
 
-val newBank = bank.withColumn("balance", col("balance").cast("Double")).withColumn("marital2", col("marital2").cast("Double")).withColumn("education2", col("education2").cast("Double")).withColumn("contact2", col("contact2").cast("Double"))
+// Selecting relevant columns and transforming categorical columns to numerical using StringIndexer
+val selectedData = data.select("age", "job", "marital", "education", "balance", "day")
+val indexer = new StringIndexer().setInputCol("job").setOutputCol("label")
+val indexedData = indexer.fit(selectedData).transform(selectedData)
 
-import org.apache.spark.ml.feature.VectorAssembler
-val assembler = new VectorAssembler().setInputCols(Array("marital2","balance","education2","contact2")).setOutputCol("features")
+// Assemble features into a vector column
+val assembler = new VectorAssembler()
+    .setInputCols(Array("age", "balance", "day"))
+    .setOutputCol("features")
 
-val features = assembler.transform(newBank)
+val assembledData = assembler.transform(indexedData)
 
-val indexerLabel = new StringIndexer().setInputCol("job").setOutputCol("indexedLabel").fit(features)
+// Split the data using different seeds 10 times
+val Array(trainData, testData) = assembledData.randomSplit(Array(0.7, 0.3), seed = 12345)
 
-val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4)
-=======
-data.show(5)
-data.describe().show()
+// Define the layers for the neural network
+val layers = Array[Int](3, 5, 4, 2) // Example layer sizes: input, hidden, hidden, output
 
-val bank = data.withColumn("age", col("age").cast("Double")).withColumn("job", col("job").cast("Double")).withColumn("marital", col("marital").cast("Double")).withColumn("education", col("education").cast("Double")).withColumn("balance", col("balance").cast("Double")).withColumn("day", col("day").cast("Double"))
+// Create the MultilayerPerceptronClassifier
+val mlp = new MultilayerPerceptronClassifier()
+.setLayers(layers)
+.setBlockSize(128)
+.setSeed(12345)
+.setMaxIter(100)
 
-val assembler = new VectorAssembler().setInputCols(Array("age","job","balance","education","day","marital")).setOutputCol("features")
+// Assuming 'label' is your target column and you want to convert it to binary labels
+val processedData = assembledData.withColumn("label", when(col("label") === 10.0, 1.0).otherwise(0.0))
 
-val features = assembler.transform(bank)
+// Then proceed with the model fitting
+val model = mlp.fit(processedData)
 
-features.printSchema()
+// Make predictions on the test data
+val predictions = model.transform(testData)
 
-val indexerLabel = new StringIndexer().setInputCol("job").setOutputCol("indexedLabel").fit(features)
+// Evaluate the model
+val evaluator = new MulticlassClassificationEvaluator()
+.setLabelCol("label")
+.setPredictionCol("prediction")
+.setMetricName("accuracy")
 
-val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(2)
->>>>>>> cf4c988c14090fe1bd1aa558205978afcd2a1069
+println(s"Prediction test = ${evaluator.evaluate(predictions.select("prediction", "label"))}")
 
-val Array(training, test) = features.randomSplit(Array(0.7, 0.3), seed = 12345)  
-
-val layers = Array[Int](4, 5, 4, 3)
-
-val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures").setBlockSize(128).setSeed(12345).setMaxIter(100)
-
-val converterLabel = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(indexerLabel.labels)
-
-val pipeline = new Pipeline().setStages(Array(indexerLabel, indexerFeatures, trainer, converterLabel))
-
-val model = pipeline.fit(training)
-val results = model.transform(test)
-results.show()
-
-val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
-
-println(s"Prueba de Precision = ${evaluator.evaluate(results.select("prediction", "indexedLabel"))}")
