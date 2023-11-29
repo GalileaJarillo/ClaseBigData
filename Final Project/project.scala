@@ -1,9 +1,21 @@
+<<<<<<< HEAD
+=======
+import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+import org.apache.spark.ml.feature.IndexToString
+import org.apache.spark.ml.feature.StringIndexer
+import org.apache.spark.ml.feature.VectorIndexer
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.feature.VectorAssembler
+>>>>>>> cf4c988c14090fe1bd1aa558205978afcd2a1069
 
 import org.apache.spark.sql.SparkSession
 val spark = SparkSession.builder().getOrCreate()
 val data  = spark.read.option("header","true").option("inferSchema", "true").csv("bank-full.csv")
 
 data.printSchema()
+<<<<<<< HEAD
 
 val bank = data.drop("age","marital","education","default","housing","loan","contact","day","month","duration","campaign","pdays","previous","poutcome","y")
 
@@ -17,6 +29,22 @@ val features = assembler.transform(newBank)
 val indexerLabel = new StringIndexer().setInputCol("job").setOutputCol("indexedLabel").fit(features)
 
 val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4)
+=======
+data.show(5)
+data.describe().show()
+
+val bank = data.withColumn("age", col("age").cast("Double")).withColumn("job", col("job").cast("Double")).withColumn("marital", col("marital").cast("Double")).withColumn("education", col("education").cast("Double")).withColumn("balance", col("balance").cast("Double")).withColumn("day", col("day").cast("Double"))
+
+val assembler = new VectorAssembler().setInputCols(Array("age","job","balance","education","day","marital")).setOutputCol("features")
+
+val features = assembler.transform(bank)
+
+features.printSchema()
+
+val indexerLabel = new StringIndexer().setInputCol("job").setOutputCol("indexedLabel").fit(features)
+
+val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(2)
+>>>>>>> cf4c988c14090fe1bd1aa558205978afcd2a1069
 
 val Array(training, test) = features.randomSplit(Array(0.7, 0.3), seed = 12345)  
 
