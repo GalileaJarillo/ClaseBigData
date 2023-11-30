@@ -115,7 +115,8 @@ results.show()
 +------------+-----------+------------+-----------+----------+-----------------+------------+-----------------+--------------------+--------------------+----------+--------------+
 ```
 ### 8. Imprima los resultados del modelo y de sus observaciones.
-Para evaluar el modelo se utiliza pipeline que engloba el setup, se crea un evaluador de clasificación multiclase y para calcular la precisión del mismo se usa accuracy. Para finalizar y calcular la precisión del modelo se imprime el resultado, y se evalía a través de prediction e indexed label. 
+Para evaluar el modelo se utiliza pipeline que engloba el setup, se crea un evaluador de clasificación multiclase y para calcular la precisión del mismo se usa accuracy. Para finalizar y calcular la precisión del modelo se imprime el resultado, y se evalía a través de prediction e indexed label.
+
 ```
 val model = pipeline.fit(training)
 val results = model.transform(test)
