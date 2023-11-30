@@ -1,25 +1,18 @@
 import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
-import org.apache.spark.ml.feature.{StringIndexer, VectorAssembler}
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.ml.feature.IndexToString
+import org.apache.spark.ml.feature.StringIndexer
+import org.apache.spark.ml.feature.VectorIndexer
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.Pipeline
 
 val spark = SparkSession.builder().getOrCreate()
 
 // Load the dataset
 val data = spark.read.option("header", "true").option("inferSchema", "true").csv("bank-full.csv")
 
-// val selectedData = data.select(
-//   col("age").cast("double"),
-//   col("job"),
-//   col("marital"),
-//   col("education"),
-//   col("balance").cast("double"),
-//   col("day").cast("double"),
-// ).toDF("age", "job", "marital", "education", "balance", "day")
-
 // Selecting relevant columns and transforming categorical columns to numerical using StringIndexer
 val features = data.select("age","job","marital","education","default","balance","housing","loan","day","month","duration","campaign","pdays","previous", "y")
-
 
 // Assemble features into a vector column
 val assembler = new VectorAssembler()
@@ -33,7 +26,7 @@ val indexerLabel = new StringIndexer().setInputCol("y").setOutputCol("indexedLab
 val indexerFeatures = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(14)
 
 // Split the data using different seeds 10 times
-val Array(trainData, testData) = assembler.randomSplit(Array(0.7, 0.3), seed = 1234L)
+val Array(trainData, testData) = features.randomSplit(Array(0.7, 0.3), seed = 1234L)
 
 // Define the layers for the neural network
 val layers = Array[Int](14, 5, 2, 2)
@@ -41,6 +34,7 @@ val layers = Array[Int](14, 5, 2, 2)
 // Create the MultilayerPerceptronClassifier
 val mlp = new MultilayerPerceptronClassifier()
 .setLayers(layers)
+.setLabelCol("indexedLabel")
 .setBlockSize(128)
 .setSeed(1234L)
 .setMaxIter(100)
@@ -62,6 +56,8 @@ val evaluator = new MulticlassClassificationEvaluator()
 .setLabelCol("label")
 .setPredictionCol("prediction")
 .setMetricName("accuracy")
+val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
 
-println(s"Test = ${evaluator.evaluate(predictions.select("prediction", "label"))}")
+val accuracy = evaluator.evaluate(predictions)
 
+println(s"Test = ${accuracy}")
